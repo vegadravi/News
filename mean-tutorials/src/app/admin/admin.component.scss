@@ -1,0 +1,14 @@
+.admin-deshboard-design {
+    display: flex;
+    height: 100vh; /* Set the height of the container to 100% of the viewport height */
+}
+
+.sidebar-mt {
+    flex: 0 0 250px; /* Adjust the width of the sidebar as needed */
+    height: 100%; /* Set the height of the sidebar to 100% */
+    background-color: #f0f0f0; /* Add a background color for better visibility */
+    /* Add other sidebar styling as needed */
+}
+.Contain{
+    width: 488vh;
+}

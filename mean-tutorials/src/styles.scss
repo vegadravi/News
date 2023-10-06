@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~mdb-ui-kit/css/mdb.min.css';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+
+html, body {
+    height: 100%; /* Yeh 100% height set karega */
+    background-color: #F9F6F4; /* Background color */
+    width: 100%;
+}
+
+.container {
+    width: 60%; /* Yeh 20% left aur 20% right chhodne ke liye hai */
+    margin-left: 20%; /* 20% left side space chhodne ke liye */
+    margin-right: 20%; /* 20% right side space chhodne ke liye */
+    word-break: break-word;
+    
+}
+img {
+    max-width: 100%;
+    height: auto;
+  }
+.title-front{
+    // font-family: 'Escrow Condensed,Georgia,serif';
+    font-family: 'Escrow Condensed,Georgia';
+    font-size: xx-large;
+	font-weight: bold;
+
+}
+.card-contain-text{
+  font-family:'Gabriola';
+  font-size: larger;
+//   font-weight: 700;
+}
+
+ .card{
+    background-color: #F9F6F4;
+    all: unset;
+ }
+
+.img-size {
+    width: 200px;
+    height: 200px;
+}
+.mt-mid-containt{
+    display: flex;
+    justify-content: space-between;
+}
+.sub-header{
+    font-family: 'Sofia';
+	font-size: x-large;
+	font-weight: 700;
+	margin-bottom: 7px;
+
+}
+.w-full {
+	width: 100%!important;
+}

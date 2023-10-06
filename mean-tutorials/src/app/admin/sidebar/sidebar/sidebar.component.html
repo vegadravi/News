@@ -1,0 +1,70 @@
+<div class="flex-shrink-0 px-0 py-3 bg-white" style="width: 280px; height: -webkit-fill-available;">
+    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+      <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+      <span class="fs-5 fw-semibold">Collapsible</span>
+    </a>
+    <ul class="list-unstyled ps-0">
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+          Home
+        </button>
+        <div class="collapse show" id="home-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a [routerLink]="" class="link-dark rounded">deshboard</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+          News Category
+        </button>
+        <div class="collapse" id="dashboard-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded" [routerLink]="'/admin/aworld'">World</a></li>
+            <li><a href="#" class="link-dark rounded">Business</a></li>
+            <li><a href="#" class="link-dark rounded">India</a></li>
+            <li><a href="#" class="link-dark rounded">Politics</a></li>
+            <li><a href="#" class="link-dark rounded">Economy</a></li>
+            <li><a href="#" class="link-dark rounded">Tech</a></li>
+            <li><a href="#" class="link-dark rounded">Finance</a></li>
+            <li><a href="#" class="link-dark rounded">Opinion</a></li>
+            <li><a href="#" class="link-dark rounded">Arts & Culture</a></li>
+            <li><a href="#" class="link-dark rounded">Real Estate</a></li>
+            <li><a href="#" class="link-dark rounded">Science</a></li>
+            <li><a href="#" class="link-dark rounded">Style</a></li>
+            <li><a href="#" class="link-dark rounded">Sport</a></li>
+            <li><a href="#" class="link-dark rounded">Video</a></li>
+            <li><a href="#" class="link-dark rounded">Audio</a></li>
+            <li><a href="#" class="link-dark rounded">Latest Headlines</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+          Orders
+        </button>
+        <div class="collapse" id="orders-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">New</a></li>
+            <li><a href="#" class="link-dark rounded">Processed</a></li>
+            <li><a href="#" class="link-dark rounded">Shipped</a></li>
+            <li><a href="#" class="link-dark rounded">Returned</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="border-top my-3"></li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+          Account
+        </button>
+        <div class="collapse" id="account-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">New...</a></li>
+            <li><a href="#" class="link-dark rounded">Profile</a></li>
+            <li><a href="#" class="link-dark rounded">Settings</a></li>
+            <li><a href="#" class="link-dark rounded">Sign out</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
