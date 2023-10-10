@@ -27,7 +27,7 @@
             <div class="field">
               <label for="Ttitle">Title</label>
               <input #Ttitle="ngModel" id="Ttitle" type="text" required pInputText
-                [(ngModel)]="formData.retailerInformation.Ttitle"
+                [(ngModel)]="formData.personalInformation.Ttitle"
                 [ngClass]="{'ng-dirty': (Ttitle.invalid && submitted) || (Ttitle.dirty && Ttitle.invalid)}">
               <small *ngIf="(Ttitle.invalid && submitted) || (Ttitle.dirty && Ttitle.invalid)" class="p-error">title is
                 required.</small>
@@ -35,7 +35,7 @@
             <div class="field">
               <label for="Tdescription">Description</label>
               <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #Tdescription="ngModel"
-                id="Tdescription" required [(ngModel)]="formData.retailerInformation.Tdescription"
+                id="Tdescription" required [(ngModel)]="formData.personalInformation.Tdescription"
                 [ngClass]="{'ng-dirty': (Tdescription.invalid && submitted) || (Tdescription.dirty && Tdescription.invalid)}"></textarea>
               <small class="p-error"
                 *ngIf="(Tdescription.invalid && submitted )|| (Tdescription.dirty && Tdescription.invalid)">Description
@@ -43,8 +43,8 @@
             </div>
             <div class="field">
               <label for="Tauthor">Author</label>
-              <input #Tauthor="ngModel" id="Tauthor" type="number" required pInputText
-                [(ngModel)]="formData.retailerInformation.Tauthor"
+              <input #Tauthor="ngModel" id="Tauthor" type="text" required pInputText
+                [(ngModel)]="formData.personalInformation.Tauthor"
                 [ngClass]="{'ng-dirty': (Tauthor.invalid && submitted) || (Tauthor.dirty && Tauthor.invalid)}">
               <small class="p-error" *ngIf="(Tauthor.invalid && submitted) || (Tauthor.dirty && Tauthor.invalid)">Author
                 is required.</small>
@@ -59,26 +59,27 @@
             </div>           
             <div class="field">
               <label for="disabledays">Select Current Date</label>
-              <p-calendar [(ngModel)]="formData.retailerInformation.Tdate" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
+              <p-calendar [(ngModel)]="formData.personalInformation.Tdate" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
             </div>
             
             <div style="display: inline-flex; margin-top: 25px;">
-              <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
-                  [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+              <div class="field col-12 md-6">
+                <p-fileUpload #fubImage mode="basic" name="demo[]"  [customUpload]="true" accept="image/*"
+                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')" [auto]="true"
                   chooseLabel="Image Upload"></p-fileUpload>
               </div>
-              <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+              <div class="field col-12 md-6">
+                <p-fileUpload #fubVideo mode="basic" name="demo[]"  [customUpload]="true" accept=".mp3,.mkv,.mp4"
+                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
                   chooseLabel="Video Upload"></p-fileUpload>
               </div>
-            </div>
+            </div>            
           </div>
         </ng-template>
         <ng-template pTemplate="footer">
           <div class="grid grid-nogutter justify-content-end">
             <p-button label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+            
           </div>
         </ng-template>
       </p-card>
@@ -88,7 +89,7 @@
   <!-- Retailer -->
   <ng-container *ngIf="activeIndex === 1">
     <!-- Step 2: Seat Information -->
-    <div class="stepsdemo-content">
+     <div class="stepsdemo-content">
       <p-card>
         <ng-template pTemplate="title">
           Retailer News
@@ -117,7 +118,7 @@
             </div>
             <div class="field col-12 md:col-4">
               <label for="RAuthor">Author</label>
-              <input #RAuthor="ngModel" id="RAuthor" type="number" required pInputText
+              <input #RAuthor="ngModel" id="RAuthor" type="Text" required pInputText
                 [(ngModel)]="formData.retailerInformation.RAuthor"
                 [ngClass]="{'ng-dirty': (RAuthor.invalid && submitted) || (RAuthor.dirty && RAuthor.invalid)}">
               <small class="p-error" *ngIf="(RAuthor.invalid && submitted) || (RAuthor.dirty && RAuthor.invalid)">Author
@@ -138,13 +139,13 @@
             
             <div style="display: inline-flex; margin-top: 25px;">
               <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
-                  [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true" accept="image/*"
+                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')" [auto]="true"
                   chooseLabel="Image Upload"></p-fileUpload>
               </div>
               <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true" accept=".mp3,.mkv,.mp4"
+                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
                   chooseLabel="Video Upload"></p-fileUpload>
               </div>
             </div>
@@ -172,7 +173,7 @@
             </div>
             <div class="field col-12 md:col-4">
               <label for="RsAuthor">Author</label>
-              <input #RsAuthor="ngModel" id="RsAuthor" type="number" required pInputText
+              <input #RsAuthor="ngModel" id="RsAuthor" type="text" required pInputText
                 [(ngModel)]="formData.retailerInformation.SubRetailerInformation.RsAuthor"
                 [ngClass]="{'ng-dirty': (RsAuthor.invalid && submitted) || (RsAuthor.dirty && RsAuthor.invalid)}">
               <small class="p-error" *ngIf="(RsAuthor.invalid && submitted) || (RsAuthor.dirty && RsAuthor.invalid)">Author
@@ -198,12 +199,12 @@
           </div>
         </ng-template>
       </p-card>
-    </div>
+    </div> 
   </ng-container>
 
   <!-- Telegram-->
   <ng-container *ngIf="activeIndex === 2">
-    <div class="stepsdemo-content">
+     <div class="stepsdemo-content">
       <p-card>
         <ng-template pTemplate="title">
           Telegram News
@@ -232,7 +233,7 @@
             </div>
             <div class="field col-12 md:col-4">
               <label for="TeAuthor">Author</label>
-              <input #TeAuthor="ngModel" id="TeAuthor" type="number" required pInputText
+              <input #TeAuthor="ngModel" id="TeAuthor" type="text" required pInputText
                 [(ngModel)]="formData.telecomInformation.TeAuthor"
                 [ngClass]="{'ng-dirty': (TeAuthor.invalid && submitted) || (TeAuthor.dirty && TeAuthor.invalid)}">
               <small class="p-error" *ngIf="(TeAuthor.invalid && submitted) || (TeAuthor.dirty && TeAuthor.invalid)">Author
@@ -253,13 +254,13 @@
             
             <div style="display: inline-flex; margin-top: 25px;">
               <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
-                  [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept="image/*"
+                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')" [auto]="true"
                   chooseLabel="Image Upload"></p-fileUpload>
               </div>
               <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept=".mp3,.mkv,.mp4"
+                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
                   chooseLabel="Video Upload"></p-fileUpload>
               </div>
             </div>
@@ -287,7 +288,7 @@
             </div>
             <div class="field col-12 md:col-4">
               <label for="TesAuthor">Author</label>
-              <input #TesAuthor="ngModel" id="TesAuthor" type="number" required pInputText
+              <input #TesAuthor="ngModel" id="TesAuthor" type="text" required pInputText
                 [(ngModel)]="formData.telecomInformation.SubtelecomInformation.TesAuthor"
                 [ngClass]="{'ng-dirty': (TesAuthor.invalid && submitted) || (TesAuthor.dirty && TesAuthor.invalid)}">
               <small class="p-error" *ngIf="(TesAuthor.invalid && submitted) || (TesAuthor.dirty && TesAuthor.invalid)">Author
@@ -313,11 +314,11 @@
           </div>
         </ng-template>
       </p-card>
-    </div>
+    </div> 
   </ng-container>
   <!-- Media -->
   <ng-container *ngIf="activeIndex === 3">
-    <div class="stepsdemo-content">
+     <div class="stepsdemo-content">
       <p-card>
         <ng-template pTemplate="title">
           Media News
@@ -346,7 +347,7 @@
             </div>
             <div class="field col-12 md:col-4">
               <label for="MAuthor">Author</label>
-              <input #MAuthor="ngModel" id="MAuthor" type="number" required pInputText
+              <input #MAuthor="ngModel" id="MAuthor" type="text" required pInputText
                 [(ngModel)]="formData.mediaInformation.MAuthor"
                 [ngClass]="{'ng-dirty': (MAuthor.invalid && submitted) || (MAuthor.dirty && MAuthor.invalid)}">
               <small class="p-error" *ngIf="(MAuthor.invalid && submitted) || (MAuthor.dirty && MAuthor.invalid)">Author
@@ -366,13 +367,13 @@
             </div>
             <div style="display: inline-flex; margin-top: 25px;">
               <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
-                  [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept="image/*"
+                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')" [auto]="true"
                   chooseLabel="Image Upload"></p-fileUpload>
               </div>
               <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept=".mp3,.mkv,.mp4"
+                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
                   chooseLabel="Video Upload"></p-fileUpload>
               </div>
             </div>
@@ -400,7 +401,7 @@
             </div>
             <div class="field col-12 md:col-4">
               <label for="MsAuthor">Author</label>
-              <input #MsAuthor="ngModel" id="MsAuthor" type="number" required pInputText
+              <input #MsAuthor="ngModel" id="MsAuthor" type="text" required pInputText
                 [(ngModel)]="formData.mediaInformation.SubmediaInformation.MsAuthor"
                 [ngClass]="{'ng-dirty': (MsAuthor.invalid && submitted) || (MsAuthor.dirty && MsAuthor.invalid)}">
               <small class="p-error" *ngIf="(MsAuthor.invalid && submitted) || (MsAuthor.dirty && MsAuthor.invalid)">Author
@@ -427,11 +428,11 @@
         </ng-template>
       </p-card>
     
-    </div>
+    </div> 
   </ng-container>
   <!-- Video -->
   <ng-container *ngIf="activeIndex === 4">
-    <div class="stepsdemo-content">
+     <div class="stepsdemo-content">
       <p-card>
         <ng-template pTemplate="title">
           Video
@@ -460,7 +461,7 @@
             </div>
             <div class="field col-12 md:col-4">
               <label for="VAuthor">Author</label>
-              <input #VAuthor="ngModel" id="VAuthor" type="number" required pInputText
+              <input #VAuthor="ngModel" id="VAuthor" type="text" required pInputText
                 [(ngModel)]="formData.videoInformation.VAuthor"
                 [ngClass]="{'ng-dirty': (VAuthor.invalid && submitted) || (VAuthor.dirty && VAuthor.invalid)}">
               <small class="p-error" *ngIf="(VAuthor.invalid && submitted) || (VAuthor.dirty && VAuthor.invalid)">Author
@@ -480,8 +481,8 @@
             </div>
             <div style="display: inline-flex; margin-top: 25px;">
               <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept=".mp3,.mkv,.mp4"
+                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
                   chooseLabel="Video Upload"></p-fileUpload>
               </div>
             </div>
@@ -489,7 +490,7 @@
         </ng-template>
       </p-card>
     
-    </div>
+    </div> 
   </ng-container>
 
   <!-- Footer Buttons -->
