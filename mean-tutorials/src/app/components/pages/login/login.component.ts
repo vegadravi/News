@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormService } from 'src/app/Services/form.service';
+import { StandaloneModule } from 'src/app/module/standalone/standalone.module';
 
 @Component({
     selector: 'app-login',
+    standalone: true,
+    imports:[StandaloneModule],
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })

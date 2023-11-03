@@ -1,504 +1,554 @@
 <div class="main-header">
-  <div class="w-100 text-center"
-    style="background-color: #F9F6F4; font-family: Sofia, sans-serif; font-weight: bold; font-size: x-large; display: flex; align-items: center;">
-    World
-  </div>
-  <p-button label="Add" (click)="showBasicDialog()" icon="pi pi-external-link"></p-button>
+    <div class="w-100 text-center"
+        style="background-color: #F9F6F4; font-family: Sofia, sans-serif; font-weight: bold; font-size: x-large; display: flex; align-items: center;">
+        World
+    </div>
+    <p-button label="Add" (click)="showBasicDialog()" icon="pi pi-external-link"></p-button>
 </div>
 <hr style="margin-top: 0;" />
 
 <p-dialog header="Add News Details" [(visible)]="displayBasic" [style]="{width: '50vw'}">
-    <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false" (onStepChange)="onStepChange($event)" ></p-steps>
-      
+    <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"
+        (onStepChange)="onStepChange($event)"></p-steps>
+    <!-- Top -->
+    <ng-container *ngIf="activeIndex === 0">
+        <!-- Step 1: Personal Information -->
+        <div class="stepsdemo-content">
+            <p-card>
+                <ng-template pTemplate="title">
+                    Top New Update
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    Enter your Top information
+                </ng-template>
+                <ng-template pTemplate="content">
+                    <div class="p-fluid">
+                        <p-button label="Add world news" (click)="addWTopnewsInformation()"></p-button>
+                        <div *ngFor="let entry of formData.WTopnewsInformation; let i = index">
+                            <div class="field">
+                                <label for="Ttitle">Title</label>
+                                <input #Ttitle="ngModel" id="Ttitle" type="text" required pInputText
+                                    [(ngModel)]="entry.Ttitle"
+                                    [ngClass]="{'ng-dirty': (Ttitle.invalid && submitted) || (Ttitle.dirty && Ttitle.invalid)}">
+                                <small *ngIf="(Ttitle.invalid && submitted) || (Ttitle.dirty && Ttitle.invalid)"
+                                    class="p-error">title is
+                                    required.</small>
+                            </div>
+                            <div class="field">
+                                <label for="Tdescription">Description</label>
+                                <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"
+                                    #Tdescription="ngModel" id="Tdescription" required [(ngModel)]="entry.Tdescription"
+                                    [ngClass]="{'ng-dirty': (Tdescription.invalid && submitted) || (Tdescription.dirty && Tdescription.invalid)}"></textarea>
+                                <small class="p-error"
+                                    *ngIf="(Tdescription.invalid && submitted )|| (Tdescription.dirty && Tdescription.invalid)">Description
+                                    is required.</small>
+                            </div>
+                            <div class="field">
+                                <label for="Tauthor">Author</label>
+                                <input #Tauthor="ngModel" id="Tauthor" type="text" required pInputText
+                                    [(ngModel)]="entry.Tauthor"
+                                    [ngClass]="{'ng-dirty': (Tauthor.invalid && submitted) || (Tauthor.dirty && Tauthor.invalid)}">
+                                <small class="p-error"
+                                    *ngIf="(Tauthor.invalid && submitted) || (Tauthor.dirty && Tauthor.invalid)">Author
+                                    is required.</small>
+                            </div>
+                            <div class="field">
+                                <label for="title">Time</label>
+                                <input #Ttime="ngModel" id="Ttime" type="text" required pInputText
+                                    [(ngModel)]="entry.Ttime"
+                                    [ngClass]="{'ng-dirty': (Ttime.invalid && submitted) || (Ttime.dirty && Ttime.invalid)}">
+                                <small *ngIf="(Ttime.invalid && submitted) || (Ttime.dirty && Ttime.invalid)"
+                                    class="p-error">Time is
+                                    required.</small>
+                            </div>
+                            <div class="field">
+                                <label for="disabledays">Select Current Date</label>
+                                <p-calendar [(ngModel)]="entry.Tdate" [minDate]="currentDate" [maxDate]="currentDate"
+                                    [readonlyInput]="true" inputId="disabledays"></p-calendar>
+                            </div>
 
- <!-- Top -->
-  <ng-container *ngIf="activeIndex === 0">
-    <!-- Step 1: Personal Information -->
-    <div class="stepsdemo-content">
-      <p-card>
-        <ng-template pTemplate="title">
-          Top New Update
-        </ng-template>
-        <ng-template pTemplate="subtitle">
-          Enter your Top information
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="p-fluid">
-            <div class="field">
-              <label for="Ttitle">Title</label>
-              <input #Ttitle="ngModel" id="Ttitle" type="text" required pInputText
-                [(ngModel)]="formData.personalInformation.Ttitle"
-                [ngClass]="{'ng-dirty': (Ttitle.invalid && submitted) || (Ttitle.dirty && Ttitle.invalid)}">
-              <small *ngIf="(Ttitle.invalid && submitted) || (Ttitle.dirty && Ttitle.invalid)" class="p-error">title is
-                required.</small>
-            </div>
-            <div class="field">
-              <label for="Tdescription">Description</label>
-              <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #Tdescription="ngModel"
-                id="Tdescription" required [(ngModel)]="formData.personalInformation.Tdescription"
-                [ngClass]="{'ng-dirty': (Tdescription.invalid && submitted) || (Tdescription.dirty && Tdescription.invalid)}"></textarea>
-              <small class="p-error"
-                *ngIf="(Tdescription.invalid && submitted )|| (Tdescription.dirty && Tdescription.invalid)">Description
-                is required.</small>
-            </div>
-            <div class="field">
-              <label for="Tauthor">Author</label>
-              <input #Tauthor="ngModel" id="Tauthor" type="text" required pInputText
-                [(ngModel)]="formData.personalInformation.Tauthor"
-                [ngClass]="{'ng-dirty': (Tauthor.invalid && submitted) || (Tauthor.dirty && Tauthor.invalid)}">
-              <small class="p-error" *ngIf="(Tauthor.invalid && submitted) || (Tauthor.dirty && Tauthor.invalid)">Author
-                is required.</small>
-            </div>
-            <div class="field">
-              <label for="title">Time</label>
-              <input #Ttime="ngModel" id="Ttime" type="text" required pInputText
-                [(ngModel)]="formData.personalInformation.Ttime"
-                [ngClass]="{'ng-dirty': (Ttime.invalid && submitted) || (Ttime.dirty && Ttime.invalid)}">
-              <small *ngIf="(Ttime.invalid && submitted) || (Ttime.dirty && Ttime.invalid)" class="p-error">Time is
-                required.</small>
-            </div>           
-            <div class="field">
-              <label for="disabledays">Select Current Date</label>
-              <p-calendar [(ngModel)]="formData.personalInformation.Tdate" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
-            </div>
-            
-            <div style="display: inline-flex; margin-top: 25px;">
-              <div class="field col-12 md-6">
-                <p-fileUpload #fubImage mode="basic" name="demo[]"  [customUpload]="true" accept="image/*"
-                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')" [auto]="true"
-                  chooseLabel="Image Upload"></p-fileUpload>
-              </div>
-              <div class="field col-12 md-6">
-                <p-fileUpload #fubVideo mode="basic" name="demo[]"  [customUpload]="true" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
-                  chooseLabel="Video Upload"></p-fileUpload>
-              </div>
-            </div>            
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <div class="grid grid-nogutter justify-content-end">
-            <p-button label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
-            
-          </div>
-        </ng-template>
-      </p-card>
-    </div>
-  </ng-container>
+                            <div style="display: inline-flex; margin-top: 25px;">
+                                <div class="field col-12 md-6">
+                                    <p-fileUpload #fubImage mode="basic" name="demoImage" [customUpload]="true" accept="image/*"
+                                      [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')" [auto]="true" chooseLabel="Image Upload"></p-fileUpload>
+                                  </div>
+                                  <div class="field col-12 md-6">
+                                    <p-fileUpload #fubVideo mode="basic" name="demoVideo" [customUpload]="true" accept=".mp3,.mkv,.mp4"
+                                      [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true" chooseLabel="Video Upload"></p-fileUpload>
+                                  </div>
+                            </div>
+                            <button class="p-button-danger my-5" pButton pRipple label="Remove"
+                                (click)="removeWTopnewsInformation(i)"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="grid grid-nogutter justify-content-end">
+                        <p-button label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
 
-  <!-- Retailer -->
-  <ng-container *ngIf="activeIndex === 1">
-    <!-- Step 2: Seat Information -->
-     <div class="stepsdemo-content">
-      <p-card>
-        <ng-template pTemplate="title">
-          Retailer News
-        </ng-template>
-        <ng-template pTemplate="subtitle">
-          Please enter the retailer releated news
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="p-fluid p-grid">
-            <div class="p-col-12 p-col-4">
-              <label for="Rtitle">Title</label>
-              <input #Rtitle="ngModel" id="Rtitle" type="text" required pInputText
-                [(ngModel)]="formData.retailerInformation.Rtitle"
-                [ngClass]="{'ng-dirty': (Rtitle.invalid && submitted) || (Rtitle.dirty && Rtitle.invalid)}">
-              <small *ngIf="(Rtitle.invalid && submitted) || (Rtitle.dirty && Rtitle.invalid)" class="p-error">title is
-                required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="RDescription">Description</label>
-              <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #RDescription="ngModel"
-                id="RDescription" required [(ngModel)]="formData.retailerInformation.RDescription"
-                [ngClass]="{'ng-dirty': (RDescription.invalid && submitted) || (RDescription.dirty && RDescription.invalid)}"></textarea>
-              <small class="p-error"
-                *ngIf="(RDescription.invalid && submitted )|| (RDescription.dirty && RDescription.invalid)">Description
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="RAuthor">Author</label>
-              <input #RAuthor="ngModel" id="RAuthor" type="Text" required pInputText
-                [(ngModel)]="formData.retailerInformation.RAuthor"
-                [ngClass]="{'ng-dirty': (RAuthor.invalid && submitted) || (RAuthor.dirty && RAuthor.invalid)}">
-              <small class="p-error" *ngIf="(RAuthor.invalid && submitted) || (RAuthor.dirty && RAuthor.invalid)">Author
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="RTime">Time</label>
-              <input #RTime="ngModel" id="RTime" type="text" required pInputText
-                [(ngModel)]="formData.retailerInformation.RTime"
-                [ngClass]="{'ng-dirty': (RTime.invalid && submitted) || (RTime.dirty && RTime.invalid)}">
-              <small *ngIf="(RTime.invalid && submitted) || (RTime.dirty && RTime.invalid)" class="p-error">Time is
-                required.</small>
-            </div>            
-            <div class="field col-12 md:col-4">
-              <label for="disabledays">Select Current Date</label>
-              <p-calendar [(ngModel)]="formData.retailerInformation.RDate" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
-            </div>
-            
-            <div style="display: inline-flex; margin-top: 25px;">
-              <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true" accept="image/*"
-                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')" [auto]="true"
-                  chooseLabel="Image Upload"></p-fileUpload>
-              </div>
-              <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
-                  chooseLabel="Video Upload"></p-fileUpload>
-              </div>
-            </div>
-          </div>
-          <div class="sub-title-retailer">
-            <p class="submitted">Please enter the Sub retailer releated news</p>
-          </div>
-          <div class="p-fluid p-grid">
-            <div class="p-col-12 p-col-4">
-              <label for="RsTitle">Title</label>
-              <input #RsTitle="ngModel" id="RsTitle" type="text" required pInputText
-                [(ngModel)]="formData.retailerInformation.SubRetailerInformation.RsTitle"
-                [ngClass]="{'ng-dirty': (RsTitle.invalid && submitted) || (RsTitle.dirty && RsTitle.invalid)}">
-              <small *ngIf="(RsTitle.invalid && submitted) || (RsTitle.dirty && RsTitle.invalid)" class="p-error">title is
-                required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="RsDesctiption">Description</label>
-              <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #RsDesctiption="ngModel"
-                id="RsDesctiption" required [(ngModel)]="formData.retailerInformation.SubRetailerInformation.RsDesctiption"
-                [ngClass]="{'ng-dirty': (RsDesctiption.invalid && submitted) || (RsDesctiption.dirty && RsDesctiption.invalid)}"></textarea>
-              <small class="p-error"
-                *ngIf="(RsDesctiption.invalid && submitted )|| (RsDesctiption.dirty && RsDesctiption.invalid)">Description
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="RsAuthor">Author</label>
-              <input #RsAuthor="ngModel" id="RsAuthor" type="text" required pInputText
-                [(ngModel)]="formData.retailerInformation.SubRetailerInformation.RsAuthor"
-                [ngClass]="{'ng-dirty': (RsAuthor.invalid && submitted) || (RsAuthor.dirty && RsAuthor.invalid)}">
-              <small class="p-error" *ngIf="(RsAuthor.invalid && submitted) || (RsAuthor.dirty && RsAuthor.invalid)">Author
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="RsTime">Time</label>
-              <input #RsTime="ngModel" id="RsTime" type="text" required pInputText
-                [(ngModel)]="formData.retailerInformation.SubRetailerInformation.RsTime"
-                [ngClass]="{'ng-dirty': (RsTime.invalid && submitted) || (RsTime.dirty && RsTime.invalid)}">
-              <small *ngIf="(RsTime.invalid && submitted) || (RsTime.dirty && RsTime.invalid)" class="p-error">Time is
-                required.</small>
-            </div>            
-            <div class="field col-12 md:col-4">
-              <label for="disabledays">Select Current Date</label>
-              <p-calendar [(ngModel)]="formData.retailerInformation.SubRetailerInformation.RTime" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <div class="grid grid-nogutter justify-content-end">
-            <p-button label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
-          </div>
-        </ng-template>
-      </p-card>
-    </div> 
-  </ng-container>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </ng-container>
 
-  <!-- Telegram-->
-  <ng-container *ngIf="activeIndex === 2">
-     <div class="stepsdemo-content">
-      <p-card>
-        <ng-template pTemplate="title">
-          Telegram News
-        </ng-template>
-        <ng-template pTemplate="subtitle">
-          Please enter the telegram releated news
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="p-fluid p-grid">
-            <div class="p-col-12 p-col-4">
-              <label for="Tetitle">Title</label>
-              <input #Tetitle="ngModel" id="Tetitle" type="text" required pInputText
-                [(ngModel)]="formData.telecomInformation.Tetitle"
-                [ngClass]="{'ng-dirty': (Tetitle.invalid && submitted) || (Tetitle.dirty && Tetitle.invalid)}">
-              <small *ngIf="(Tetitle.invalid && submitted) || (Tetitle.dirty && Tetitle.invalid)" class="p-error">title is
-                required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="TeDescription">Description</label>
-              <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #TeDescription="ngModel"
-                id="TeDescription" required [(ngModel)]="formData.telecomInformation.TeDescription"
-                [ngClass]="{'ng-dirty': (TeDescription.invalid && submitted) || (TeDescription.dirty && TeDescription.invalid)}"></textarea>
-              <small class="p-error"
-                *ngIf="(TeDescription.invalid && submitted )|| (TeDescription.dirty && TeDescription.invalid)">Description
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="TeAuthor">Author</label>
-              <input #TeAuthor="ngModel" id="TeAuthor" type="text" required pInputText
-                [(ngModel)]="formData.telecomInformation.TeAuthor"
-                [ngClass]="{'ng-dirty': (TeAuthor.invalid && submitted) || (TeAuthor.dirty && TeAuthor.invalid)}">
-              <small class="p-error" *ngIf="(TeAuthor.invalid && submitted) || (TeAuthor.dirty && TeAuthor.invalid)">Author
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="TeTime">Time</label>
-              <input #TeTime="ngModel" id="TeTime" type="text" required pInputText
-                [(ngModel)]="formData.telecomInformation.TeTime"
-                [ngClass]="{'ng-dirty': (TeTime.invalid && submitted) || (TeTime.dirty && TeTime.invalid)}">
-              <small *ngIf="(TeTime.invalid && submitted) || (TeTime.dirty && TeTime.invalid)" class="p-error">Time is
-                required.</small>
-            </div>            
-            <div class="field col-12 md:col-4">
-              <label for="disabledays">Select Current Date</label>
-              <p-calendar [(ngModel)]="formData.telecomInformation.TeDate" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
-            </div>
-            
-            <div style="display: inline-flex; margin-top: 25px;">
-              <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept="image/*"
-                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')" [auto]="true"
-                  chooseLabel="Image Upload"></p-fileUpload>
-              </div>
-              <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
-                  chooseLabel="Video Upload"></p-fileUpload>
-              </div>
-            </div>
-          </div>
-          <div class="sub-title-retailer">
-            <p class="submitted">Please enter the Sub telegram releated news</p>
-          </div>
-          <div class="p-fluid p-grid">
-            <div class="p-col-12 p-col-4">
-              <label for="TesTitle">Title</label>
-              <input #TesTitle="ngModel" id="TesTitle" type="text" required pInputText
-                [(ngModel)]="formData.telecomInformation.SubtelecomInformation.TesTitle"
-                [ngClass]="{'ng-dirty': (TesTitle.invalid && submitted) || (TesTitle.dirty && TesTitle.invalid)}">
-              <small *ngIf="(TesTitle.invalid && submitted) || (TesTitle.dirty && TesTitle.invalid)" class="p-error">title is
-                required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="TesDescription">Description</label>
-              <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #TesDescription="ngModel"
-                id="TesDescription" required [(ngModel)]="formData.telecomInformation.SubtelecomInformation.TesDescription"
-                [ngClass]="{'ng-dirty': (TesDescription.invalid && submitted) || (TesDescription.dirty && TesDescription.invalid)}"></textarea>
-              <small class="p-error"
-                *ngIf="(TesDescription.invalid && submitted )|| (TesDescription.dirty && TesDescription.invalid)">Description
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="TesAuthor">Author</label>
-              <input #TesAuthor="ngModel" id="TesAuthor" type="text" required pInputText
-                [(ngModel)]="formData.telecomInformation.SubtelecomInformation.TesAuthor"
-                [ngClass]="{'ng-dirty': (TesAuthor.invalid && submitted) || (TesAuthor.dirty && TesAuthor.invalid)}">
-              <small class="p-error" *ngIf="(TesAuthor.invalid && submitted) || (TesAuthor.dirty && TesAuthor.invalid)">Author
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="TesTime">Time</label>
-              <input #TesTime="ngModel" id="TesTime" type="text" required pInputText
-                [(ngModel)]="formData.telecomInformation.SubtelecomInformation.TesTime"
-                [ngClass]="{'ng-dirty': (TesTime.invalid && submitted) || (TesTime.dirty && TesTime.invalid)}">
-              <small *ngIf="(TesTime.invalid && submitted) || (TesTime.dirty && TesTime.invalid)" class="p-error">Time is
-                required.</small>
-            </div>            
-            <div class="field col-12 md:col-4">
-              <label for="disabledays">Select Current Date</label>
-              <p-calendar [(ngModel)]="formData.telecomInformation.SubtelecomInformation.TesDate" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <div class="grid grid-nogutter justify-content-end">
-            <p-button label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
-          </div>
-        </ng-template>
-      </p-card>
-    </div> 
-  </ng-container>
-  <!-- Media -->
-  <ng-container *ngIf="activeIndex === 3">
-     <div class="stepsdemo-content">
-      <p-card>
-        <ng-template pTemplate="title">
-          Media News
-        </ng-template>
-        <ng-template pTemplate="subtitle">
-          Please enter the media releated news
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="p-fluid p-grid">
-            <div class="p-col-12 p-col-4">
-              <label for="Mtitle">Title</label>
-              <input #Mtitle="ngModel" id="Mtitle" type="text" required pInputText
-                [(ngModel)]="formData.mediaInformation.Mtitle"
-                [ngClass]="{'ng-dirty': (Mtitle.invalid && submitted) || (Mtitle.dirty && Mtitle.invalid)}">
-              <small *ngIf="(Mtitle.invalid && submitted) || (Mtitle.dirty && Mtitle.invalid)" class="p-error">title is
-                required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="MDescription">Description</label>
-              <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #MDescription="ngModel"
-                id="MDescription" required [(ngModel)]="formData.mediaInformation.MDescription"
-                [ngClass]="{'ng-dirty': (MDescription.invalid && submitted) || (MDescription.dirty && MDescription.invalid)}"></textarea>
-              <small class="p-error"
-                *ngIf="(MDescription.invalid && submitted )|| (MDescription.dirty && MDescription.invalid)">Description
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="MAuthor">Author</label>
-              <input #MAuthor="ngModel" id="MAuthor" type="text" required pInputText
-                [(ngModel)]="formData.mediaInformation.MAuthor"
-                [ngClass]="{'ng-dirty': (MAuthor.invalid && submitted) || (MAuthor.dirty && MAuthor.invalid)}">
-              <small class="p-error" *ngIf="(MAuthor.invalid && submitted) || (MAuthor.dirty && MAuthor.invalid)">Author
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="MTime">Time</label>
-              <input #MTime="ngModel" id="MTime" type="text" required pInputText
-                [(ngModel)]="formData.mediaInformation.MTime"
-                [ngClass]="{'ng-dirty': (MTime.invalid && submitted) || (MTime.dirty && MTime.invalid)}">
-              <small *ngIf="(MTime.invalid && submitted) || (MTime.dirty && MTime.invalid)" class="p-error">Time is
-                required.</small>
-            </div>            
-            <div class="field col-12 md:col-4">
-              <label for="disabledays">Select Current Date</label>
-              <p-calendar [(ngModel)]="formData.mediaInformation.MDate" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
-            </div>
-            <div style="display: inline-flex; margin-top: 25px;">
-              <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept="image/*"
-                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')" [auto]="true"
-                  chooseLabel="Image Upload"></p-fileUpload>
-              </div>
-              <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
-                  chooseLabel="Video Upload"></p-fileUpload>
-              </div>
-            </div>
-          </div>
-          <div class="sub-title-retailer">
-            <p class="submitted">Please enter the Sub Media releated news</p>
-          </div>
-          <div class="p-fluid p-grid">
-            <div class="p-col-12 p-col-4">
-              <label for="Mstitle">Title</label>
-              <input #Mstitle="ngModel" id="Mstitle" type="text" required pInputText
-                [(ngModel)]="formData.mediaInformation.SubmediaInformation.Mstitle"
-                [ngClass]="{'ng-dirty': (Mstitle.invalid && submitted) || (Mstitle.dirty && Mstitle.invalid)}">
-              <small *ngIf="(Mstitle.invalid && submitted) || (Mstitle.dirty && Mstitle.invalid)" class="p-error">title is
-                required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="MsDescription">Description</label>
-              <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #MsDescription="ngModel"
-                id="MsDescription" required [(ngModel)]="formData.mediaInformation.SubmediaInformation.MsDescription"
-                [ngClass]="{'ng-dirty': (MsDescription.invalid && submitted) || (MsDescription.dirty && MsDescription.invalid)}"></textarea>
-              <small class="p-error"
-                *ngIf="(MsDescription.invalid && submitted )|| (MsDescription.dirty && MsDescription.invalid)">Description
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="MsAuthor">Author</label>
-              <input #MsAuthor="ngModel" id="MsAuthor" type="text" required pInputText
-                [(ngModel)]="formData.mediaInformation.SubmediaInformation.MsAuthor"
-                [ngClass]="{'ng-dirty': (MsAuthor.invalid && submitted) || (MsAuthor.dirty && MsAuthor.invalid)}">
-              <small class="p-error" *ngIf="(MsAuthor.invalid && submitted) || (MsAuthor.dirty && MsAuthor.invalid)">Author
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="MsTime">Time</label>
-              <input #MsTime="ngModel" id="MsTime" type="text" required pInputText
-                [(ngModel)]="formData.mediaInformation.SubmediaInformation.MsTime"
-                [ngClass]="{'ng-dirty': (MsTime.invalid && submitted) || (MsTime.dirty && MsTime.invalid)}">
-              <small *ngIf="(MsTime.invalid && submitted) || (MsTime.dirty && MsTime.invalid)" class="p-error">Time is
-                required.</small>
-            </div>            
-            <div class="field col-12 md:col-4">
-              <label for="disabledays">Select Current Date</label>
-              <p-calendar [(ngModel)]="formData.mediaInformation.SubmediaInformation.MsDate" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <div class="grid grid-nogutter justify-content-end">
-            <p-button label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
-          </div>
-        </ng-template>
-      </p-card>
-    
-    </div> 
-  </ng-container>
-  <!-- Video -->
-  <ng-container *ngIf="activeIndex === 4">
-     <div class="stepsdemo-content">
-      <p-card>
-        <ng-template pTemplate="title">
-          Video
-        </ng-template>
-        <ng-template pTemplate="subtitle">
-          Please enter the Video releated news
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="p-fluid p-grid">
-            <div class="p-col-12 p-col-4">
-              <label for="Vtitle">Title</label>
-              <input #Vtitle="ngModel" id="Vtitle" type="text" required pInputText
-                [(ngModel)]="formData.videoInformation.Vtitle"
-                [ngClass]="{'ng-dirty': (Vtitle.invalid && submitted) || (Vtitle.dirty && Vtitle.invalid)}">
-              <small *ngIf="(Vtitle.invalid && submitted) || (Vtitle.dirty && Vtitle.invalid)" class="p-error">title is
-                required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="VDescription">Description</label>
-              <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #VDescription="ngModel"
-                id="VDescription" required [(ngModel)]="formData.videoInformation.VDescription"
-                [ngClass]="{'ng-dirty': (VDescription.invalid && submitted) || (VDescription.dirty && VDescription.invalid)}"></textarea>
-              <small class="p-error"
-                *ngIf="(VDescription.invalid && submitted )|| (VDescription.dirty && VDescription.invalid)">Description
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="VAuthor">Author</label>
-              <input #VAuthor="ngModel" id="VAuthor" type="text" required pInputText
-                [(ngModel)]="formData.videoInformation.VAuthor"
-                [ngClass]="{'ng-dirty': (VAuthor.invalid && submitted) || (VAuthor.dirty && VAuthor.invalid)}">
-              <small class="p-error" *ngIf="(VAuthor.invalid && submitted) || (VAuthor.dirty && VAuthor.invalid)">Author
-                is required.</small>
-            </div>
-            <div class="field col-12 md:col-4">
-              <label for="VTime">Time</label>
-              <input #VTime="ngModel" id="VTime" type="text" required pInputText
-                [(ngModel)]="formData.videoInformation.VTime"
-                [ngClass]="{'ng-dirty': (VTime.invalid && submitted) || (VTime.dirty && VTime.invalid)}">
-              <small *ngIf="(VTime.invalid && submitted) || (VTime.dirty && VTime.invalid)" class="p-error">Time is
-                required.</small>
-            </div>            
-            <div class="field col-12 md:col-4">
-              <label for="disabledays">Select Current Date</label>
-              <p-calendar [(ngModel)]="formData.videoInformation.VDate" [minDate]="currentDate" [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
-            </div>
-            <div style="display: inline-flex; margin-top: 25px;">
-              <div class="field col-12 md:col-6">
-                <p-fileUpload #fubauto mode="basic" name="demo[]"[customUpload]="true" accept=".mp3,.mkv,.mp4"
-                  [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
-                  chooseLabel="Video Upload"></p-fileUpload>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </p-card>
-    
-    </div> 
-  </ng-container>
+    <!-- Retailer -->
+    <ng-container *ngIf="activeIndex === 1">
+        <!-- Step 2: Seat Information -->
+        <div class="stepsdemo-content">
+            <p-card>
+                <ng-template pTemplate="title">
+                    Retailer News
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    Please enter the retailer releated news
+                </ng-template>
+                <ng-template pTemplate="content">
+                    <div class="p-fluid p-grid">
+                        <div class="p-col-12 p-col-4">
+                            <label for="Rtitle">Title</label>
+                            <input #Rtitle="ngModel" id="Rtitle" type="text" required pInputText
+                                [(ngModel)]="formData.retailerInformation.Rtitle"
+                                [ngClass]="{'ng-dirty': (Rtitle.invalid && submitted) || (Rtitle.dirty && Rtitle.invalid)}">
+                            <small *ngIf="(Rtitle.invalid && submitted) || (Rtitle.dirty && Rtitle.invalid)"
+                                class="p-error">title is
+                                required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="RDescription">Description</label>
+                            <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #RDescription="ngModel"
+                                id="RDescription" required [(ngModel)]="formData.retailerInformation.RDescription"
+                                [ngClass]="{'ng-dirty': (RDescription.invalid && submitted) || (RDescription.dirty && RDescription.invalid)}"></textarea>
+                            <small class="p-error"
+                                *ngIf="(RDescription.invalid && submitted )|| (RDescription.dirty && RDescription.invalid)">Description
+                                is required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="RAuthor">Author</label>
+                            <input #RAuthor="ngModel" id="RAuthor" type="Text" required pInputText
+                                [(ngModel)]="formData.retailerInformation.RAuthor"
+                                [ngClass]="{'ng-dirty': (RAuthor.invalid && submitted) || (RAuthor.dirty && RAuthor.invalid)}">
+                            <small class="p-error"
+                                *ngIf="(RAuthor.invalid && submitted) || (RAuthor.dirty && RAuthor.invalid)">Author
+                                is required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="RTime">Time</label>
+                            <input #RTime="ngModel" id="RTime" type="text" required pInputText
+                                [(ngModel)]="formData.retailerInformation.RTime"
+                                [ngClass]="{'ng-dirty': (RTime.invalid && submitted) || (RTime.dirty && RTime.invalid)}">
+                            <small *ngIf="(RTime.invalid && submitted) || (RTime.dirty && RTime.invalid)"
+                                class="p-error">Time is
+                                required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="disabledays">Select Current Date</label>
+                            <p-calendar [(ngModel)]="formData.retailerInformation.RDate" [minDate]="currentDate"
+                                [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
+                        </div>
 
-  <!-- Footer Buttons -->
-  <ng-template pTemplate="footer">
-    <div class="grid grid-nogutter justify-content-end">
-      <p-button label="Back" (click)="prevPage()" icon="pi pi-angle-left"></p-button>
-      <p-button label="Complete" (click)="complete()" icon="pi pi-angle-right" iconPos="right"
-        styleClass="p-button-success"></p-button>
-    </div>
-  </ng-template>
+                        <div style="display: inline-flex; margin-top: 25px;">
+                            <div class="field col-12 md:col-6">
+                                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true" accept="image/*"
+                                    [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')"
+                                    [auto]="true" chooseLabel="Image Upload"></p-fileUpload>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true"
+                                    accept=".mp3,.mkv,.mp4" [maxFileSize]="1000000"
+                                    (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
+                                    chooseLabel="Video Upload"></p-fileUpload>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub-title-retailer">
+                        <p class="submitted">Please enter the Sub retailer releated news</p>
+                    </div>
+                    <div class="p-fluid p-grid">
+                        <div
+                            *ngFor="let subRetailerInfo of formData.retailerInformation.SubRetailerInformation; let iR = index">
+                            <div class="p-col-12 p-col-4">
+                                <label for="RsTitle">Title</label>
+                                <input #RsTitle="ngModel" id="RsTitle" type="text" required pInputText
+                                    [(ngModel)]="subRetailerInfo.RsTitle">
+                                <small *ngIf="!(subRetailerInfo.RsTitle)" class="p-error">title
+                                    is
+                                    required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="RsDesctiption">Description</label>
+                                <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"
+                                    #RsDesctiption="ngModel" id="RsDesctiption" required
+                                    [(ngModel)]="subRetailerInfo.RsDesctiption"></textarea>
+                                <small class="p-error" *ngIf="!(subRetailerInfo.RsDesctiption)">Description
+                                    is required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="RsAuthor">Author</label>
+                                <input #RsAuthor="ngModel" id="RsAuthor" type="text" required pInputText
+                                    [(ngModel)]="subRetailerInfo.RsAuthor">
+                                <small class="p-error" *ngIf="!(subRetailerInfo.RsAuthor)">Author
+                                    is required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="RsTime">Time</label>
+                                <input #RsTime="ngModel" id="RsTime" type="text" required pInputText
+                                    [(ngModel)]="subRetailerInfo.RsTime">
+                                <small *ngIf="!(subRetailerInfo.RsTime)" class="p-error">Time is
+                                    required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="disabledays">Select Current Date</label>
+                                <p-calendar [(ngModel)]="subRetailerInfo.RsDate" [minDate]="currentDate"
+                                    [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
+                            </div>
+                            <div class="field col-12 md-4 py-3 ">
+                                <button class="p-button-danger" pButton pRipple label="Remove"
+                                    (click)="removeSubRetailerInformation(iR)"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <p-button label="Add Sub Retailer Information" (click)="addSubRetailerInformation()"></p-button>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="grid grid-nogutter justify-content-end">
+                        <p-button label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </ng-container>
+
+    <!-- telecom-->
+    <ng-container *ngIf="activeIndex === 2">
+        <div class="stepsdemo-content">
+            <p-card>
+                <ng-template pTemplate="title">
+                    telecom News
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    Please enter the telecom releated news
+                </ng-template>
+                <ng-template pTemplate="content">
+                    <div class="p-fluid p-grid">
+                        <div class="p-col-12 p-col-4">
+                            <label for="Tetitle">Title</label>
+                            <input #Tetitle="ngModel" id="Tetitle" type="text" required pInputText
+                                [(ngModel)]="formData.telecomInformation.Tetitle"
+                                [ngClass]="{'ng-dirty': (Tetitle.invalid && submitted) || (Tetitle.dirty && Tetitle.invalid)}">
+                            <small *ngIf="(Tetitle.invalid && submitted) || (Tetitle.dirty && Tetitle.invalid)"
+                                class="p-error">title
+                                is
+                                required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="TeDescription">Description</label>
+                            <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #TeDescription="ngModel"
+                                id="TeDescription" required [(ngModel)]="formData.telecomInformation.TeDescription"
+                                [ngClass]="{'ng-dirty': (TeDescription.invalid && submitted) || (TeDescription.dirty && TeDescription.invalid)}"></textarea>
+                            <small class="p-error"
+                                *ngIf="(TeDescription.invalid && submitted )|| (TeDescription.dirty && TeDescription.invalid)">Description
+                                is required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="TeAuthor">Author</label>
+                            <input #TeAuthor="ngModel" id="TeAuthor" type="text" required pInputText
+                                [(ngModel)]="formData.telecomInformation.TeAuthor"
+                                [ngClass]="{'ng-dirty': (TeAuthor.invalid && submitted) || (TeAuthor.dirty && TeAuthor.invalid)}">
+                            <small class="p-error"
+                                *ngIf="(TeAuthor.invalid && submitted) || (TeAuthor.dirty && TeAuthor.invalid)">Author
+                                is required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="TeTime">Time</label>
+                            <input #TeTime="ngModel" id="TeTime" type="text" required pInputText
+                                [(ngModel)]="formData.telecomInformation.TeTime"
+                                [ngClass]="{'ng-dirty': (TeTime.invalid && submitted) || (TeTime.dirty && TeTime.invalid)}">
+                            <small *ngIf="(TeTime.invalid && submitted) || (TeTime.dirty && TeTime.invalid)"
+                                class="p-error">Time is
+                                required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="disabledays">Select Current Date</label>
+                            <p-calendar [(ngModel)]="formData.telecomInformation.TeDate" [minDate]="currentDate"
+                                [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
+                        </div>
+
+                        <div style="display: inline-flex; margin-top: 25px;">
+                            <div class="field col-12 md:col-6">
+                                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true" accept="image/*"
+                                    [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')"
+                                    [auto]="true" chooseLabel="Image Upload"></p-fileUpload>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true"
+                                    accept=".mp3,.mkv,.mp4" [maxFileSize]="1000000"
+                                    (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
+                                    chooseLabel="Video Upload"></p-fileUpload>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub-title-retailer">
+                        <p class="submitted">Please enter the Sub telecom releated news</p>
+                    </div>
+                    <div class="p-fluid p-grid">
+                        <div
+                            *ngFor="let subTelecomInfo of formData.telecomInformation.SubtelecomInformation; let id = index">
+                            <div class="p-col-12 p-col-4">
+                                <label for="TesTitle">Title</label>
+                                <input id="TesTitle" type="text" required pInputText
+                                    [(ngModel)]="subTelecomInfo.TesTitle" name="TesTitle" />
+                                <small class="p-error" *ngIf="!(subTelecomInfo.TesTitle)">Title is required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="TesDescription">Description</label>    
+                                <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"
+                                    #TesDescription="ngModel" id="TesDescription" required
+                                    [(ngModel)]="subTelecomInfo.TesDescription"></textarea>
+                                <small class="p-error" *ngIf="!(subTelecomInfo.TesDescription)">Description
+                                    is required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="TesAuthor">Author</label>
+                                <input #TesAuthor="ngModel" id="TesAuthor" type="text" required pInputText
+                                    [(ngModel)]="subTelecomInfo.TesAuthor">
+                                <small class="p-error" *ngIf="!(subTelecomInfo.TesAuthor)">Author
+                                    is required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="TesTime">Time</label>
+                                <input #TesTime="ngModel" id="TesTime" type="text" required pInputText
+                                    [(ngModel)]="subTelecomInfo.TesTime">
+                                <small *ngIf="!(subTelecomInfo.TesTime)" class="p-error">Time is
+                                    required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="disabledays">Select Current Date</label>
+                                <p-calendar [(ngModel)]="subTelecomInfo.TesDate" [minDate]="currentDate"
+                                    [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
+                            </div>
+                            <div class="field col-12 md-4 py-3 ">
+                                <button class="p-button-danger" pButton pRipple label="Remove"
+                                    (click)="removeSubTelecomInformation(id)"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <p-button label="Add SubtelecomInformation" (click)="addSubTelecomInformation()"></p-button>
+
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="grid grid-nogutter justify-content-end">
+                        <p-button label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </ng-container>
+    <!-- Media -->
+    <ng-container *ngIf="activeIndex === 3">
+        <div class="stepsdemo-content">
+            <p-card>
+                <ng-template pTemplate="title">
+                    Media News
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    Please enter the media releated news
+                </ng-template>
+                <ng-template pTemplate="content">
+                    <div class="p-fluid p-grid">
+                        <div class="p-col-12 p-col-4">
+                            <label for="Mtitle">Title</label>
+                            <input #Mtitle="ngModel" id="Mtitle" type="text" required pInputText
+                                [(ngModel)]="formData.mediaInformation.Mtitle"
+                                [ngClass]="{'ng-dirty': (Mtitle.invalid && submitted) || (Mtitle.dirty && Mtitle.invalid)}">
+                            <small *ngIf="(Mtitle.invalid && submitted) || (Mtitle.dirty && Mtitle.invalid)"
+                                class="p-error">title is
+                                required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="MDescription">Description</label>
+                            <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #MDescription="ngModel"
+                                id="MDescription" required [(ngModel)]="formData.mediaInformation.MDescription"
+                                [ngClass]="{'ng-dirty': (MDescription.invalid && submitted) || (MDescription.dirty && MDescription.invalid)}"></textarea>
+                            <small class="p-error"
+                                *ngIf="(MDescription.invalid && submitted )|| (MDescription.dirty && MDescription.invalid)">Description
+                                is required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="MAuthor">Author</label>
+                            <input #MAuthor="ngModel" id="MAuthor" type="text" required pInputText
+                                [(ngModel)]="formData.mediaInformation.MAuthor"
+                                [ngClass]="{'ng-dirty': (MAuthor.invalid && submitted) || (MAuthor.dirty && MAuthor.invalid)}">
+                            <small class="p-error"
+                                *ngIf="(MAuthor.invalid && submitted) || (MAuthor.dirty && MAuthor.invalid)">Author
+                                is required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="MTime">Time</label>
+                            <input #MTime="ngModel" id="MTime" type="text" required pInputText
+                                [(ngModel)]="formData.mediaInformation.MTime"
+                                [ngClass]="{'ng-dirty': (MTime.invalid && submitted) || (MTime.dirty && MTime.invalid)}">
+                            <small *ngIf="(MTime.invalid && submitted) || (MTime.dirty && MTime.invalid)"
+                                class="p-error">Time is
+                                required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="disabledays">Select Current Date</label>
+                            <p-calendar [(ngModel)]="formData.mediaInformation.MDate" [minDate]="currentDate"
+                                [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
+                        </div>
+                        <div style="display: inline-flex; margin-top: 25px;">
+                            <div class="field col-12 md:col-6">
+                                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true" accept="image/*"
+                                    [maxFileSize]="1000000" (uploadHandler)="onBasicUploadAuto($event, 'image')"
+                                    [auto]="true" chooseLabel="Image Upload"></p-fileUpload>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true"
+                                    accept=".mp3,.mkv,.mp4" [maxFileSize]="1000000"
+                                    (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
+                                    chooseLabel="Video Upload"></p-fileUpload>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub-title-retailer">
+                        <p class="submitted">Please enter the Sub Media releated news</p>
+                    </div>
+                    <div class="p-fluid p-grid">
+                        <div *ngFor="let subMediaInfo of formData.mediaInformation.SubmediaInformation; let i = index">
+                            <div class="p-col-12 p-col-4">
+                                <label for="Mstitle">Title</label>
+                                <input #Mstitle="ngModel" id="Mstitle" type="text" required pInputText
+                                    [(ngModel)]="subMediaInfo.Mstitle">
+                                <small *ngIf="!(subMediaInfo.Mstitle)" class="p-error">title
+                                    is
+                                    required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="MsDescription">Description</label>
+                                <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"
+                                    #MsDescription="ngModel" id="MsDescription" required
+                                    [(ngModel)]="subMediaInfo.MsDescription"></textarea>
+                                <small class="p-error" *ngIf="!(subMediaInfo.MsDescription)">Description
+                                    is required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="MsAuthor">Author</label>
+                                <input #MsAuthor="ngModel" id="MsAuthor" type="text" required pInputText
+                                    [(ngModel)]="subMediaInfo.MsAuthor">
+                                <small class="p-error" *ngIf="!(subMediaInfo.MsAuthor)">Author
+                                    is required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="MsTime">Time</label>
+                                <input #MsTime="ngModel" id="MsTime" type="text" required pInputText
+                                    [(ngModel)]="subMediaInfo.MsTime">
+                                <small *ngIf="!(subMediaInfo.MsTime)" class="p-error">Time is
+                                    required.</small>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label for="disabledays">Select Current Date</label>
+                                <p-calendar [(ngModel)]="subMediaInfo.MsDate" [minDate]="currentDate"
+                                    [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
+                            </div>
+                            <div class="field col-12 md-4 py-3 ">
+                                <button class="p-button-danger" pButton pRipple label="Remove"
+                                    (click)="removeSubMediaInformation(i)"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <p-button label="Add SubMediaInformation" (click)="addSubMediaInformation()"></p-button>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="grid grid-nogutter justify-content-end">
+                        <p-button label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+                    </div>
+                </ng-template>
+            </p-card>
+
+        </div>
+    </ng-container>
+    <!-- Video -->
+    <ng-container *ngIf="activeIndex === 4">
+        <div class="stepsdemo-content">
+            <p-card>
+                <ng-template pTemplate="title">
+                    Video
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    Please enter the Video releated news
+                </ng-template>
+                <ng-template pTemplate="content">
+                    <div class="p-fluid p-grid">
+                    <div *ngFor="let videoInfo of formData.videoInformation; let i = index">
+                        <div class="p-col-12 p-col-4">
+                            <label for="Vtitle">Title</label>
+                            <input #Vtitle="ngModel" id="Vtitle" type="text" required pInputText
+                                [(ngModel)]="videoInfo.Vtitle"
+                                [ngClass]="{'ng-dirty': (Vtitle.invalid && submitted) || (Vtitle.dirty && Vtitle.invalid)}">
+                            <small *ngIf="(Vtitle.invalid && submitted) || (Vtitle.dirty && Vtitle.invalid)"
+                                class="p-error">title is
+                                required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="VDescription">Description</label>
+                            <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" #VDescription="ngModel"
+                                id="VDescription" required [(ngModel)]="videoInfo.VDescription"
+                                [ngClass]="{'ng-dirty': (VDescription.invalid && submitted) || (VDescription.dirty && VDescription.invalid)}"></textarea>
+                            <small class="p-error"
+                                *ngIf="(VDescription.invalid && submitted )|| (VDescription.dirty && VDescription.invalid)">Description
+                                is required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="VAuthor">Author</label>
+                            <input #VAuthor="ngModel" id="VAuthor" type="text" required pInputText
+                                [(ngModel)]="videoInfo.VAuthor"
+                                [ngClass]="{'ng-dirty': (VAuthor.invalid && submitted) || (VAuthor.dirty && VAuthor.invalid)}">
+                            <small class="p-error"
+                                *ngIf="(VAuthor.invalid && submitted) || (VAuthor.dirty && VAuthor.invalid)">Author
+                                is required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="VTime">Time</label>
+                            <input #VTime="ngModel" id="VTime" type="text" required pInputText
+                                [(ngModel)]="videoInfo.VTime"
+                                [ngClass]="{'ng-dirty': (VTime.invalid && submitted) || (VTime.dirty && VTime.invalid)}">
+                            <small *ngIf="(VTime.invalid && submitted) || (VTime.dirty && VTime.invalid)"
+                                class="p-error">Time is
+                                required.</small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label for="disabledays">Select Current Date</label>
+                            <p-calendar [(ngModel)]="videoInfo.VDate" [minDate]="currentDate"
+                                [maxDate]="currentDate" [readonlyInput]="true" inputId="disabledays"></p-calendar>
+                        </div>
+                        <div style="display: inline-flex; margin-top: 25px;">
+                            <div class="field col-12 md:col-6">
+                                <p-fileUpload #fubauto mode="basic" name="demo[]" [customUpload]="true"
+                                    accept=".mp3,.mkv,.mp4" [maxFileSize]="1000000"
+                                    (uploadHandler)="onBasicUploadAuto($event, 'video')" [auto]="true"
+                                    chooseLabel="Video Upload"></p-fileUpload>
+                            </div>
+                        </div>
+                        <div class="field col-12 md-4 py-3 ">
+                            <button class="p-button-danger" pButton pRipple label="Remove"
+                                (click)="removeVideoInformation(i)"></button>
+                        </div>
+                    </div>
+                </div>
+                <p-button label="Add Video Information" (click)="addNewVideoInformation()"></p-button>
+                </ng-template>
+            </p-card>
+
+        </div>
+    </ng-container>
+
+    <!-- Footer Buttons -->
+    <ng-template pTemplate="footer">
+        <div class="grid grid-nogutter justify-content-end">
+            <p-button label="Back" (click)="prevPage()" icon="pi pi-angle-left"></p-button>
+            <p-button label="Complete" (click)="complete()" icon="pi pi-angle-right" iconPos="right"
+                styleClass="p-button-success"></p-button>
+        </div>
+    </ng-template>
 </p-dialog>
