@@ -1,6 +1,9 @@
 const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const axios = require('axios');
+const mediaStackAPIUrl = 'http://api.mediastack.com/v1/news';
+const apiKey = '4876c8da8d1a74d206c16e85ede221cc'; 
 import cors from "cors";
 const app = express();
 app.use(express.json());
@@ -36,7 +39,6 @@ app.post('/saveFormData', (req:any, res:any) => {
 app.get('/getRegistrationData',(req:any, res:any) => {
     const sql = 'SELECT email, password  FROM register';
     db.query(sql, (err:any, results:any) => {
-        console.log('R4x',results);
         if (err) {
             console.error('Error retrieving data:', err);
             res.status(500).send('Error retrieving data');
@@ -46,6 +48,23 @@ app.get('/getRegistrationData',(req:any, res:any) => {
         }
     });
 })
+
+//get live api data search home
+app.get('/api/home', async (req:any, res:any) => {
+    try {
+      const response = await axios.get(mediaStackAPIUrl, {
+        params: {
+          access_key: apiKey,
+          keywords: req.query.keywords
+        },
+      });
+      res.json(response.data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  });
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
