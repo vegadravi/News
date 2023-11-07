@@ -38,3 +38,7 @@ frontend run command
 mysql table
 http://localhost/phpmyadmin/index.php?route=/sql&db=mydatabase&table=register&pos=0
 ```
+
+//api use 
+https://www.marketaux.com/documentation
+https://mediastack.com/documentation

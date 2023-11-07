@@ -1,35 +1,372 @@
-<div class="container">
-    <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
-        <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">Search news</a>
-    </div>
-    <hr />
-    <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"  [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}">
-        {{searchValue | json}}
-        <button class="btn btn-outline-success" type="submit" (click)=" getSearchNews(searchValue)">Search</button>
-    </form>
-    <!-- world news card -->
-    <ul>
-        <li *ngFor="let newsItem of worldNews">
-            <div class="card mb-3" style="max-width: 700px;">
-                <div class="row g-0">
-                    <div class="col-md-4 mb-md-0 p-md-4">
-                        <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}" class="img-fluid rounded-start" style="width: 300px; height: 250px;" alt=" Image is not Found">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title title-front">{{ newsItem.title }}</h5>
-                            <p class="card-text card-contain-text">{{ newsItem.description }}</p>
-                            <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">source<a
-                                    style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
-                            <div style="display: flex; justify-content: space-between;" class="card-contain-text">
-                                <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small></p>
-                                <p class="card-text">  <a [href]="newsItem.url" target="_blank">Read More</a></p>
+<div *ngIf="this.categoryOfHeader === '/'">
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">Search news</a>
+        </div>
+        <hr />
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}">
+            <button class="btn btn-outline-success" type="submit" (click)=" getSearchNews(searchValue)">Search</button>
+        </form>
+        <!-- world news card -->
+        <ul>
+            <li *ngFor="let newsItem of ourNews">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-md-0 p-md-4">
+                            <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}"
+                                class="img-fluid rounded-start" style="width: 300px; height: 250px;"
+                                alt=" Image is not Found">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                                <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">
+                                    source<a style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
+                                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                                    <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small>
+                                    </p>
+                                    <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr />
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- World -->
+<div *ngIf="this.categoryOfHeader === '/world'">
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">World</a>
+        </div>
+        <hr />
+        <!-- world news card -->
+        <ul>
+            <li *ngFor="let newsItem of ourNews">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-md-0 p-md-4">
+                            <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}"
+                                class="img-fluid rounded-start" style="width: 300px; height: 250px;"
+                                alt=" Image is not Found">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                                <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">
+                                    source<a style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
+                                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                                    <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small>
+                                    </p>
+                                    <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Business -->
+<div *ngIf="this.categoryOfHeader === '/business'">
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">Business</a>
+        </div>
+        <hr />
+        <!-- world news card -->
+        <ul>
+            <li *ngFor="let newsItem of ourNews">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-md-0 p-md-4">
+                            <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}"
+                                class="img-fluid rounded-start" style="width: 300px; height: 250px;"
+                                alt=" Image is not Found">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                                <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">
+                                    source<a style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
+                                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                                    <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small>
+                                    </p>
+                                    <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Eco -->
+<div *ngIf="this.categoryOfHeader === '/finance'" >
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">Finance</a>
+        </div>
+        <hr />
+        <!-- world news card -->
+        <div class="card-deck">
+            <div class="card" *ngFor="let newsItem of ourNews">
+              <img [src]="newsItem.image_url" class="card-img-top" alt="News Image">
+              <div class="card-body">
+                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                <p class="card-text" style="font-family: 'Sofia, sans-serif'; font-style: italic;">
+                  by <a style="color: deepskyblue;">{{ newsItem.source }}</a>
+                </p>
+                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                  <p class="card-text"><small class="text-muted">Last updated {{ newsItem.published_at | date:'shortTime' }}</small></p>
+                  <p class="card-text"><small class="text-muted">{{ newsItem.published_at | date:'dd-MMM-yyyy' }}</small></p>
+                  <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                </div>
+              </div>
             </div>
-            <hr />
-        </li>
-    </ul>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.categoryOfHeader === '/entertainment'" >
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">Entertainment</a>
+        </div>
+        <hr />
+        <!-- world news card -->
+        <ul>
+            <li *ngFor="let newsItem of ourNews">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-md-0 p-md-4">
+                            <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}"
+                                class="img-fluid rounded-start" style="width: 300px; height: 250px;"
+                                alt=" Image is not Found">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                                <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">source<a
+                                        style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
+                                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                                    <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small></p>
+                                    <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- tech -->
+<div *ngIf="this.categoryOfHeader === '/tech'"> 
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">Tech</a>
+        </div>
+        <hr />
+        <!-- world news card -->
+        <ul>
+            <li *ngFor="let newsItem of ourNews">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-md-0 p-md-4">
+                            <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}"
+                                class="img-fluid rounded-start" style="width: 300px; height: 250px;"
+                                alt=" Image is not Found">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                                <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">source<a
+                                        style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
+                                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                                    <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small></p>
+                                    <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="this.categoryOfHeader === '/science'"> 
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">science</a>
+        </div>
+        <hr />
+        <!-- world news card -->
+        <ul>
+            <li *ngFor="let newsItem of ourNews">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-md-0 p-md-4">
+                            <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}"
+                                class="img-fluid rounded-start" style="width: 300px; height: 250px;"
+                                alt=" Image is not Found">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                                <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">source<a
+                                        style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
+                                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                                    <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small></p>
+                                    <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="this.categoryOfHeader === '/india'"> 
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">India</a>
+        </div>
+        <hr />
+        <!-- world news card -->
+        <ul>
+            <li *ngFor="let newsItem of ourNews">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-md-0 p-md-4">
+                            <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}"
+                                class="img-fluid rounded-start" style="width: 300px; height: 250px;"
+                                alt=" Image is not Found">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                                <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">source<a
+                                        style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
+                                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                                    <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small></p>
+                                    <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="this.categoryOfHeader === '/sport'"> 
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">Sport</a>
+        </div>
+        <hr />
+        <!-- world news card -->
+        <ul>
+            <li *ngFor="let newsItem of ourNews">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-md-0 p-md-4">
+                            <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}"
+                                class="img-fluid rounded-start" style="width: 300px; height: 250px;"
+                                alt=" Image is not Found">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                                <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">source<a
+                                        style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
+                                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                                    <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small></p>
+                                    <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="this.categoryOfHeader === '/health'"> 
+    <div class="container">
+        <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
+            <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">Health</a>
+        </div>
+        <hr />
+        <!-- world news card -->
+        <ul>
+            <li *ngFor="let newsItem of ourNews">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-md-0 p-md-4">
+                            <img src="{{newsItem.image || '../../../../../../assets/news/no-image-available.png'}}"
+                                class="img-fluid rounded-start" style="width: 300px; height: 250px;"
+                                alt=" Image is not Found">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title title-front">{{ newsItem.title }}</h5>
+                                <p class="card-text card-contain-text">{{ newsItem.description }}</p>
+                                <p class="card-text" style="font-family: 'Sofia, sans-serif';font-style: italic;">source<a
+                                        style="color:deepskyblue ;"> {{ newsItem.source }}</a></p>
+                                <div style="display: flex; justify-content: space-between;" class="card-contain-text">
+                                    <p class="card-text"><small class="text-muted">{{ newsItem.published_at }}</small></p>
+                                    <p class="card-text"> <a [href]="newsItem.url" target="_blank">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="this.categoryOfHeader === '/video'" >
+
+</div>
+<div *ngIf="this.categoryOfHeader === '/audio'" >
+
+</div>
+<div *ngIf="this.categoryOfHeader === '/latest'" >
+
+</div>

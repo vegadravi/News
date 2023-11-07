@@ -5,8 +5,6 @@ import { StandaloneModule } from 'src/app/module/standalone/standalone.module';
 
 @Component({
 	selector: 'app-admin-world',
-	standalone: true,
-  	imports:[StandaloneModule],
 	templateUrl: './admin-world.component.html',
 	styleUrls: ['./admin-world.component.scss'],
 })
