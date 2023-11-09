@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { fromEvent, debounceTime, pluck, distinctUntilChanged, filter, map, } from 'rxjs';
 import { ApiService } from 'src/app/Services/api.service';
+import { Video } from 'src/app/interface/search.interface';
 import { StandaloneModule } from 'src/app/module/standalone/standalone.module';
 
 @Component({
   selector: 'app-home',
-
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit  {
 
   newsData: any;
   worldNews: any;
   searchValue: any;
   categoryOfHeader: any;
   BusinessNews: any;
-  ourNews: any
+  ourNews: any;
   constructor(private newsService: ApiService, private router: Router) { }
   keywordStatic = 'food';
   ngOnInit() {
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
     this.getSearchNews();
   }
   getSearchNews(keywords?: any) {
-    if (this.categoryOfHeader === '/') {
+    if (this.categoryOfHeader === '/home') {
       if (keywords !== undefined) {
         this.newsService.getSearchNews(keywords).subscribe((response) => {
           this.ourNews = response.data;
@@ -89,4 +90,6 @@ export class HomeComponent implements OnInit {
       });
     }
   }
+
+  
 }

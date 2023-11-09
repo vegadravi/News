@@ -1,4 +1,4 @@
-<div *ngIf="this.categoryOfHeader === '/'">
+<div *ngIf="this.categoryOfHeader === '/home'">
     <div class="container">
         <div class="d-flex justify-content-center" style="font-family: Trirong, serif">
             <a class="nav-link w-100 p-3 text-md-center" style="font-weight: bold;font-size: xx-large;">Search news</a>
@@ -362,11 +362,13 @@
 </div>
 
 <div *ngIf="this.categoryOfHeader === '/video'" >
-
-</div>
-<div *ngIf="this.categoryOfHeader === '/audio'" >
-
-</div>
-<div *ngIf="this.categoryOfHeader === '/latest'" >
-
+    <div class="ui centered grid" style="margin-top: 3rem;">
+        <div class="fourteen wide column">
+          <h1 class="ui centered aligned header">
+            <span style="vertical-align: middle;">Youtube Search </span>
+            <img src="/assets/yt.png" alt="">
+          </h1>
+          <app-search-container></app-search-container>
+        </div>
+      </div>
 </div>

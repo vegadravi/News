@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         this.registerData.map((data: any) => {
             if (data.email === this.formData.email && data.password === this.formData.password){
-                this.router.navigate(['/']);
+                this.router.navigate(['/home']);
             } 
             if (data.email !== this.formData.email && data.password !== this.formData.password){    
                 this.formDataWrong = true;
