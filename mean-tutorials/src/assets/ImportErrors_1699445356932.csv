@@ -1,0 +1,2 @@
+importErrorMessage,shipToName,shipToZip,pONumber,invoiceNumber,invoiceDate,invoiceAmount,commissionAmount,accountNumber,shipToAccountNumber,Direct,importStatus
+Invoice not imported as do not import option was selected,Moon Light Agency,75001,KM8634987,112233,2023-05-16,10,2,,,No,Not Imported

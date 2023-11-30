@@ -1,0 +1,3 @@
+importErrorMessage,shipToName,shipToZip,pONumber,invoiceNumber,invoiceDate,invoiceAmount,commissionAmount,accountNumber,shipToAccountNumber,Direct,importStatus
+Multiple orders (2) exist with the given PO Number,In House Test,75002,ss08112363693,44444550,2023-08-11,200,11,,,No,Not Imported
+Multiple orders (3) exist with the given PO Number,In House Test,75002,ss08112363693,15455964,2023-08-11,23302,200,,,No,Not Imported
