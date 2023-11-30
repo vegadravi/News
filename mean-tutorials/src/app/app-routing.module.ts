@@ -3,11 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/pages/login/login.component';
 import { SingupComponent } from './components/pages/singup/singup.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { EconomyComponent } from './components/NewsFolder/economy/economy.component';
+import { MainHomeComponent } from './main-home/main-home.component';
+// import { EconomyComponent } from './components/NewsFolder/economy/economy.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
-  {path:'',component:EconomyComponent},
+  {path:'',component:MainHomeComponent},
   {path:'home',component:HomeComponent },
   {path:'register',component:SingupComponent},
   {path:'world',component:HomeComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'health',component:HomeComponent},
   {path:'sport',component:HomeComponent},
   {path:'video',component:HomeComponent},
+  {path:'thankMessage',component:HomeComponent}
 ];
 
 @NgModule({

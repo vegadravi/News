@@ -13,6 +13,6 @@ export class FormService {
         return this.http.post(url, data);
   }
   getRegistrationData(): Observable<any[]> {
-    return this.http.get<any[]>( `${this.serverUrl}/getRegistrationData`);
+    return this.http.get<any[]>( `http://localhost:3000/getRegistrationData`);
   }
 }

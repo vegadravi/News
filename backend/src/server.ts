@@ -7,6 +7,7 @@ const apiKey = '4876c8da8d1a74d206c16e85ede221cc';
 import cors from "cors";
 const app = express();
 app.use(express.json());
+let mainDataGet:any = [];
 app.use(cors({
     credentials:true,
     origin:["http://localhost:4201"]
@@ -22,6 +23,11 @@ const db = mysql.createConnection({
 db.connect((err:any) => {
     if (err) throw err;
     console.log('MySQL connected');
+    db.query("SELECT * FROM `register`", function (err:string, result:any, fields:any) {
+        if (err) throw err;
+        mainDataGet = result;
+        console.log("Data is show>>",result);
+      });
 });
 
 app.use(bodyParser.json());
@@ -44,13 +50,15 @@ app.get('/getRegistrationData',(req:any, res:any) => {
             res.status(500).send('Error retrieving data');
         } else {
             console.log('Data retrieved successfully');
-            res.json(results);
+            console.log('R4x', results);
+    console.log('R4x full data mainDataGet>>>',mainDataGet);
+             res.json(mainDataGet);
         }
     });
 })
-
 //get live api data search home
-app.get('/api/home', async (req:any, res:any) => {
+app.get('api/home', async (req:any, res:any) => {
+    console.log('R4x req',req);
     try {
       const response = await axios.get(mediaStackAPIUrl, {
         params: {
@@ -58,6 +66,7 @@ app.get('/api/home', async (req:any, res:any) => {
           keywords: req.query.keywords
         },
       });
+      console.log('R4x response', response.data);
       res.json(response.data);
     } catch (error) {
       console.error(error);

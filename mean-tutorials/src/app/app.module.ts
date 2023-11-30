@@ -33,10 +33,10 @@ import { AdminModule } from 'src/app/admin/admin.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SearchInputComponent } from './components/NewsFolder/search-input/search-input.component';
-import { SearchListComponent } from './components/NewsFolder/search-list/search-list.component';
-import { SearchContainerComponent } from './components/NewsFolder/search-container/search-container.component';
-import { EconomyComponent } from './components/NewsFolder/economy/economy.component';
+import { SearchInputComponent } from './search/components/search-input/search-input.component';
+import { SearchListComponent } from './search/components/search-list/search-list.component';
+import { SearchContainerComponent } from './search/container/search-container/search-container.component';
+import { MainHomeComponent } from './main-home/main-home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +47,7 @@ import { EconomyComponent } from './components/NewsFolder/economy/economy.compon
     SearchInputComponent,
     SearchListComponent,
     SearchContainerComponent,
-    EconomyComponent
+    MainHomeComponent,
   ],
   imports: [
     BrowserModule,

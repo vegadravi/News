@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit  {
   }
   getSearchNews(keywords?: any) {
     if (this.categoryOfHeader === '/home') {
+      console.log('R4x /home',);
       if (keywords !== undefined) {
         this.newsService.getSearchNews(keywords).subscribe((response) => {
           this.ourNews = response.data;

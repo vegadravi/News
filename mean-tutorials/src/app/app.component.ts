@@ -13,7 +13,6 @@ export class AppComponent {
     const routesToHideHeader = ['/login', '/signup', '/admin','/register','/'];
 
     // Return false if the current route is in the list of routes to hide the header.
-    console.log('R4x routesToHideHeader.includes(this.router.url) ',);
     return !routesToHideHeader.includes(this.router.url);
   }
 }
